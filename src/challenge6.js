@@ -1,11 +1,9 @@
-let charSet = `- abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@£$%^&*()-_=+[]{};:'"\\|,.<>/?\`~§±1234567890`
-charSet = charSet.split('');
+let characters = ['character', ' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '!', '@', '£', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', '[', ']', '{', '}', ';', ':', '\'', '"', '\\', '|', ',', '.', '<', '>', '/', '?', '`', '~', '§', '±', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 
-
-const encrypt = function (string) {
+let encrypt = string => {
   let encryptedString = '';
-  for (let i = 0; i < string.length; i++) {
-    encryptedString += charSet.findIndex(char => char === string[i]);
+  for (let letter in string) {
+    encryptedString += characters.findIndex(char => string[letter] === char);
   }
   return encryptedString;
 }

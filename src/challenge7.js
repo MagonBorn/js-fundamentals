@@ -1,30 +1,26 @@
+let characters = ['character', ' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '!', '@', '£', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', '[', ']', '{', '}', ';', ':', '\'', '"', '\\', '|', ',', '.', '<', '>', '/', '?', '`', '~', '§', '±', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+
 class LetterNumber {
   constructor() {
-    this._charSet = `- abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@£$%^&*()-_=+[]{};:'"\\|,.<>/?\`~§±1234567890`;
-    this._charSet = this._charSet.split('');
+    this.cipherText = '';
+    this.currentIndex = 0;
   }
 
-  encrypt(plaintext, offset) {
-    let encryptedString = '';
-    for (let i = 0; i < plaintext.length; i++) {
-      let j = this._charSet.findIndex(letter => letter === plaintext[i]);
-      j += offset;
-      let diff = 97 + offset
-      if (j > 97) {
-        j -= diff - 99;
+  encrypt(plainText, offset) {
+    this.cipherText = '';
+    for (let letter in plainText) {
+      this.currentIndex = characters.findIndex(char => char === plainText[letter]) + offset;
+      if (this.currentIndex > 99) {
+        this.currentIndex = this.currentIndex % 100;
       }
-      if (j < 10) {
-        j = '0' + j;
-      }
-      encryptedString += j;
+      this.currentIndex < 10 ? this.cipherText += '0' + this.currentIndex : this.cipherText += this.currentIndex;
     }
-    return encryptedString;
+    return this.cipherText;
   }
-
 }
 
 const letterNumber = new LetterNumber();
-console.log(letterNumber.encrypt(`a`, 1));
-console.log(letterNumber.encrypt(`Ed`, 4));
-console.log(letterNumber.encrypt(`Hi, Ed!`, 302));
+console.log(letterNumber.encrypt(`a`, 1)); // "03"
+console.log(letterNumber.encrypt(`Ed`, 4)); //"3609"""
+console.log(letterNumber.encrypt(`Hi, Ed!`, 302)); // "37128003340756"
 console.log(letterNumber.encrypt(`hello, world`, 5));
