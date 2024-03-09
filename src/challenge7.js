@@ -9,15 +9,19 @@ class LetterNumber {
   encrypt(plainText, offset) {
     this.cipherText = '';
     for (let letter in plainText) {
-      this.currentIndex = characters.findIndex(char => char === plainText[letter]) + offset;
-      if (this.currentIndex > 99) {
-        this.currentIndex = this.currentIndex % 100;
+      this.currentIndex = characters.findIndex(char => char === plainText[letter]);
+      for (let i = 0; i < offset; i++) {
+        this.currentIndex += 1;
+        if (this.currentIndex > 99) {
+          this.currentIndex = 0;
+        }
       }
       this.currentIndex < 10 ? this.cipherText += '0' + this.currentIndex : this.cipherText += this.currentIndex;
     }
     return this.cipherText;
   }
 }
+
 
 const letterNumber = new LetterNumber();
 console.log(letterNumber.encrypt(`a`, 1)); // "03"
